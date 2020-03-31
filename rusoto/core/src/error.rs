@@ -76,11 +76,11 @@ impl<E> From<io::Error> for RusotoError<E> {
 impl<E: Error + 'static> fmt::Display for RusotoError<E> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
-            RusotoError::Service(ref err) => write!(f, "{}", err),
-            RusotoError::Validation(ref cause) => write!(f, "{}", cause),
-            RusotoError::Credentials(ref err) => write!(f, "{}", err),
-            RusotoError::HttpDispatch(ref dispatch_error) => write!(f, "{}", dispatch_error),
-            RusotoError::ParseError(ref cause) => write!(f, "{}", cause),
+            RusotoError::Service(ref err) => write!(f, "service: {}", err),
+            RusotoError::Validation(ref cause) => write!(f, "validation: {}", cause),
+            RusotoError::Credentials(ref err) => write!(f, "credentials: {}", err),
+            RusotoError::HttpDispatch(ref dispatch_error) => write!(f, "http dispatch: {}", dispatch_error),
+            RusotoError::ParseError(ref cause) => write!(f, "parse: {}", cause),
             RusotoError::Unknown(ref cause) => write!(
                 f,
                 "Request ID: {:?} Body: {}",

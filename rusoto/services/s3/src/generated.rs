@@ -17194,7 +17194,13 @@ impl fmt::Display for GetObjectError {
     #[allow(unused_variables)]
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
-            GetObjectError::NoSuchKey(ref cause) => write!(f, "{}", cause),
+            GetObjectError::NoSuchKey(ref cause) => {
+                write!(f, "no such key")?;
+                if !cause.is_empty() {
+                    write!(f, ": {}", cause)?;
+                }
+                Ok(())
+            },
         }
     }
 }
